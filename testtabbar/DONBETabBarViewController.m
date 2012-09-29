@@ -46,6 +46,20 @@
     }
 }
 
+-(void)hideTopShadow:(BOOL)flag{
+    for(UIView *view in self.view.subviews)
+    {
+        if([view isKindOfClass:[UITabBar class]]) {
+            for (UIView *vvv in view.subviews) {
+                if ([vvv isKindOfClass:[UIImageView class]]) {
+                    vvv.alpha = !flag;
+                }
+            }
+            break;
+        }
+    }
+}
+
 - (void)buttonClicked:(UIButton *)sender
 {
     [NSTimer scheduledTimerWithTimeInterval:0.15 target:self selector:@selector(fire:) userInfo:[NSNumber numberWithInt:sender.tag] repeats:NO];
@@ -75,7 +89,6 @@
         {
             if([view isKindOfClass:[UITabBar class]]) {
                 [view setFrame:CGRectMake(view.frame.origin.x, [UIScreen mainScreen].bounds.size.height - self.tabBar.frame.size.height, view.frame.size.width, view.frame.size.height)];
-                
             } else {
                 [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y, view.frame.size.width, [UIScreen mainScreen].bounds.size.height - self.tabBar.frame.size.height)];
             }

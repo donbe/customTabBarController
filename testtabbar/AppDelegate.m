@@ -34,6 +34,8 @@
     
     [tabbar setupCustomElements:@[b1,b2]];
     [tabbar setupBackground:@"bgd_topbar.png"];
+//    [tabbar hideTopShadow:YES];
+
     
     self.window.rootViewController = tabbar;
     [self.window makeKeyAndVisible];
