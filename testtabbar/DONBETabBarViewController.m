@@ -54,9 +54,9 @@
     
     if ([self.tabbarButtons count]) {
         UIButton *button = [self.tabbarButtons objectAtIndex:0];
-        [self.tabBar insertSubview:imageview belowSubview:button];
+        [self.buttonsView insertSubview:imageview belowSubview:button];
     }else{
-        [self.tabBar addSubview:imageview];
+        [self.buttonsView addSubview:imageview];
     }
 }
 
