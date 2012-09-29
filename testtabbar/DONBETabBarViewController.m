@@ -8,16 +8,30 @@
 
 #import "DONBETabBarViewController.h"
 
+
+@interface ButtonsGroupView : UIView
+
+@end
+
+@implementation ButtonsGroupView
+
+@end
+
+
 @interface DONBETabBarViewController ()
 
 @property (nonatomic, retain) NSArray *tabbarButtons;
-
+@property (nonatomic, retain) ButtonsGroupView *buttonsView;
 @end
 
 @implementation DONBETabBarViewController
 
 -(void)setupCustomElements:(NSArray *)buttons
 {
+    self.buttonsView = [[ButtonsGroupView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 49, 320, 49)];
+    self.buttonsView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:self.buttonsView];
+    
     self.tabbarButtons = buttons;
     for (int i=0; i<[buttons count]; i++) {
         UIButton *button = [buttons objectAtIndex:i];
@@ -25,7 +39,7 @@
         [button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchDown];
         button.frame = CGRectMake(320/[buttons count]*i, 0, 320/[buttons count], 49);
         button.adjustsImageWhenHighlighted = NO;
-        [self.tabBar addSubview:button];
+        [self.buttonsView addSubview:button];
         
         if (i == self.selectedIndex) {
             button.selected = YES;
@@ -80,14 +94,14 @@
     self.selectedIndex = tabID;
 }
 
-
+#pragma mark -
 - (void)showTabBar
 {
     self.tabBarShowing = YES;
     [UIView animateWithDuration:0.3 animations:^{
         for(UIView *view in self.view.subviews)
         {
-            if([view isKindOfClass:[UITabBar class]]) {
+            if([view isKindOfClass:[UITabBar class]] || [view isKindOfClass:[ButtonsGroupView class]]) {
                 [view setFrame:CGRectMake(view.frame.origin.x, [UIScreen mainScreen].bounds.size.height - self.tabBar.frame.size.height, view.frame.size.width, view.frame.size.height)];
             } else {
                 [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y, view.frame.size.width, [UIScreen mainScreen].bounds.size.height - self.tabBar.frame.size.height)];
@@ -101,7 +115,7 @@
     [UIView animateWithDuration:0.3 animations:^{
         for(UIView *view in self.view.subviews)
         {
-            if([view isKindOfClass:[UITabBar class]]) {
+            if([view isKindOfClass:[UITabBar class]] || [view isKindOfClass:[ButtonsGroupView class]]) {
                 [view setFrame:CGRectMake(view.frame.origin.x, [UIScreen mainScreen].bounds.size.height, view.frame.size.width, view.frame.size.height)];
             } else {
                 [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y, view.frame.size.width, [UIScreen mainScreen].bounds.size.height)];
@@ -110,5 +124,6 @@
     }];
     self.tabBarShowing = NO;
 }
+
 
 @end

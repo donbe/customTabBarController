@@ -21,9 +21,10 @@
 
     ViewController *v = [ViewController new];
     ViewController2 *v2 = [ViewController2 new];
+    UINavigationController *nv = [[UINavigationController alloc] initWithRootViewController:v];
     
     DONBETabBarViewController *tabbar = [DONBETabBarViewController new];
-    tabbar.viewControllers = @[v,v2];
+    tabbar.viewControllers = @[nv,v2];
     
     UIButton *b1 = [UIButton buttonWithType:UIButtonTypeCustom];
     [b1 setImage:[UIImage imageNamed:@"111.png"] forState:UIControlStateNormal];
